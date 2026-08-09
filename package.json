@@ -1,0 +1,12 @@
+{
+  "name": "nexsolution-website",
+  "version": "1.0.0",
+  "description": "NexSolution - Customer Experience Operations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

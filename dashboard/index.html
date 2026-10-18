@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexSolution Outreach Hub</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+
+<style>
+:root {
+  --navy: #0B1829;
+  --navy-card: #0F2035;
+  --navy-border: #1a3050;
+  --mint: #00C9A7;
+  --mint-dark: #00A88A;
+  --mint-glow: rgba(0,201,167,0.15);
+  --text: #E8F4F0;
+  --text-muted: #6b8fa8;
+  --red: #FF5A5A;
+  --orange: #FFA940;
+  --yellow: #FFD666;
+  --green: #52C41A;
+  --blue: #40A9FF;
+  --purple: #b07eec;
+  --radius: 10px;
+  color-scheme: dark;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{
+  background:var(--navy);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;
+  line-height:1.5;
+  padding-left:max(20px,env(safe-area-inset-left,0px));
+  padding-right:max(20px,env(safe-area-inset-right,0px));
+  padding-block:0 40px;
+}
+
+/* HEADER */
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 0;border-bottom:1px solid var(--navy-border);
+  flex-wrap:wrap;gap:12px;
+  position:sticky;top:env(safe-area-inset-top,0px);
+  background:var(--navy);z-index:10;
+}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-mark{
+  width:38px;height:38px;
+  background:linear-gradient(135deg,var(--mint),var(--mint-dark));
+  border-radius:9px;display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:var(--navy);
+}
+.logo-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;}
+.logo-name em{color:var(--mint);font-style:normal;}
+.logo-sub{font-size:10px;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-top:1px;}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:20px 0 4px;}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr);}}
+.stat{
+  background:var(--navy-card);border:1px solid var(--navy-border);
+  border-radius:var(--radius);padding:16px 18px;
+}
+.stat-lbl{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;}
+.stat-val{
+  font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
+.c-mint{color:var(--mint);}
+.c-yellow{color:var(--yellow);}
+.c-orange{color:var(--orange);}
+.c-green{color:var(--green);}
+
+/* CONTROLS */
+.controls{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 0 10px;flex-wrap:wrap;
+}
+.tabs{
+  display:flex;background:var(--navy-card);
+  border:1px solid var(--navy-border);border-radius:8px;
+  padding:3px;gap:2px;flex-wrap:wrap;
+}
+.tab{
+  padding:6px 13px;border-radius:6px;font-size:12px;font-weight:500;
+  cursor:pointer;color:var(--text-muted);border:none;background:none;white-space:nowrap;
+  transition:all .15s;
+}
+.tab.active{background:var(--mint);color:var(--navy);}
+.tab:not(.active):hover{color:var(--text);}
+.search{
+  background:var(--navy-card);border:1px solid var(--navy-border);
+  border-radius:8px;padding:7px 13px;color:var(--text);font-size:13px;
+  min-width:180px;outline:none;font-family:inherit;
+}
+.search:focus{border-color:var(--mint);}
+.search::placeholder{color:var(--text-muted);}
+.ml{margin-left:auto;}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;
+  cursor:pointer;border:none;transition:all .15s;white-space:nowrap;font-family:inherit;
+}
+.btn-mint{background:var(--mint);color:var(--navy);}
+.btn-mint:hover{background:var(--mint-dark);}
+.btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--navy-border);}
+.btn-ghost:hover{border-color:var(--mint);color:var(--mint);}
+.btn-sm{padding:5px 10px;font-size:12px;border-radius:7px;}
+.btn-red{background:transparent;color:var(--red);border:1px solid rgba(255,90,90,.25);}
+.btn-red:hover{background:rgba(255,90,90,.1);}
+.btn-email{background:var(--mint-glow);color:var(--mint);border:1px solid rgba(0,201,167,.25);}
+.btn-email:hover{background:rgba(0,201,167,.25);}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--navy-border);border-radius:var(--radius);margin-bottom:24px;}
+table{width:100%;border-collapse:collapse;min-width:860px;}
+thead{background:var(--navy-card);border-bottom:1px solid var(--navy-border);}
+th{
+  padding:10px 14px;text-align:left;font-size:10px;font-weight:600;
+  color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;
+}
+td{padding:12px 14px;border-bottom:1px solid var(--navy-border);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.02);}
+.pname{font-weight:600;font-size:13px;}
+.psub{font-size:11px;color:var(--text-muted);margin-top:2px;}
+.contact{font-size:12px;color:var(--text-muted);}
+.cemail{color:var(--mint);font-size:12px;}
+.actions{display:flex;gap:6px;}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;}
+.b-new{background:rgba(64,169,255,.15);color:var(--blue);}
+.b-emailed{background:rgba(255,214,102,.15);color:var(--yellow);}
+.b-responded{background:rgba(255,169,64,.15);color:var(--orange);}
+.b-booked{background:rgba(82,196,26,.15);color:var(--green);}
+.b-closed{background:rgba(107,143,168,.12);color:var(--text-muted);}
+.iss{display:inline-flex;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:500;}
+.i-resp{background:rgba(255,90,90,.12);color:var(--red);}
+.i-book{background:rgba(255,169,64,.12);color:var(--orange);}
+.i-new{background:rgba(0,201,167,.12);color:var(--mint);}
+.i-cx{background:rgba(176,126,236,.12);color:var(--purple);}
+.stars{color:var(--yellow);font-size:12px;font-variant-numeric:tabular-nums;}
+.stars.na{color:var(--text-muted);}
+
+/* EMPTY */
+.empty{text-align:center;padding:60px 20px;color:var(--text-muted);}
+.empty-icon{font-size:44px;margin-bottom:12px;opacity:.35;}
+
+/* MODAL */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);
+  display:flex;align-items:center;justify-content:center;
+  z-index:200;padding:16px;
+}
+.overlay[hidden]{display:none!important;}
+.modal{
+  background:var(--navy-card);border:1px solid var(--navy-border);
+  border-radius:14px;padding:24px;width:100%;max-width:560px;
+  max-height:90vh;overflow-y:auto;
+}
+.modal-wide{max-width:680px;}
+.mhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.mtitle{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
+.mclose{background:none;border:none;color:var(--text-muted);font-size:22px;cursor:pointer;padding:2px 8px;border-radius:6px;line-height:1;}
+.mclose:hover{color:var(--text);}
+
+/* FORM */
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:500px){.fgrid{grid-template-columns:1fr;}}
+.fg{display:flex;flex-direction:column;gap:6px;}
+.fg.full{grid-column:1/-1;}
+label{font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;}
+input,select,textarea{
+  background:var(--navy);border:1px solid var(--navy-border);
+  border-radius:8px;padding:9px 12px;color:var(--text);
+  font-size:13px;font-family:inherit;outline:none;transition:border-color .15s;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--mint);}
+select option{background:var(--navy-card);}
+textarea{resize:vertical;min-height:80px;}
+.faction{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;}
+
+/* EMAIL TEMPLATE */
+.subj-bar{
+  background:var(--navy);border:1px solid var(--navy-border);
+  border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.subj-bar strong{color:var(--text-muted);font-weight:500;font-size:11px;text-transform:uppercase;}
+.email-body{
+  background:var(--navy);border:1px solid var(--navy-border);
+  border-radius:8px;padding:16px;font-size:13px;line-height:1.75;
+  color:var(--text);white-space:pre-wrap;word-break:break-word;
+  min-height:320px;font-family:inherit;
+}
+.slbl{font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
+.copy-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.copied-toast{color:var(--green);font-size:12px;font-weight:500;opacity:0;transition:opacity .3s;}
+.copied-toast.show{opacity:1;}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--navy-border);margin:16px 0;}
+
+/* NOTE TAG */
+.note-tag{
+  background:var(--navy);border:1px solid var(--navy-border);
+  border-radius:7px;padding:8px 12px;font-size:12px;
+  color:var(--text-muted);font-style:italic;
+  min-height:50px;
+}
+</style>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-mark">N</div>
+    <div>
+      <div class="logo-name">Nex<em>Solution</em></div>
+      <div class="logo-sub">Dental Outreach Hub</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;">
+    <button class="btn btn-ghost btn-sm" onclick="openEmailTemplate()">📧 Email Template</button>
+    <button class="btn btn-mint btn-sm" onclick="openAdd()">+ Add Lead</button>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats" id="statsBar"></div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="tabs" id="tabs">
+    <button class="tab active" onclick="setTab('all',this)">All</button>
+    <button class="tab" onclick="setTab('new',this)">New Target</button>
+    <button class="tab" onclick="setTab('emailed',this)">Emailed</button>
+    <button class="tab" onclick="setTab('responded',this)">Responded</button>
+    <button class="tab" onclick="setTab('booked',this)">Booked ✓</button>
+  </div>
+  <input class="search" id="search" placeholder="Search by name, city, dentist…" oninput="renderTable()">
+  <div class="ml" style="font-size:11px;color:var(--text-muted)" id="leadCount"></div>
+</div>
+
+<!-- TABLE -->
+<div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Practice</th>
+        <th>Location</th>
+        <th>Contact</th>
+        <th>Issue</th>
+        <th>Rating</th>
+        <th>Status</th>
+        <th>Last Contacted</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="tBody"></tbody>
+  </table>
+</div>
+
+<!-- ADD/EDIT MODAL -->
+<div class="overlay" id="addModal">
+  <div class="modal">
+    <div class="mhead">
+      <div class="mtitle" id="modalTitle">Add New Lead</div>
+      <button class="mclose" onclick="closeAdd()">✕</button>
+    </div>
+    <form id="leadForm">
+      <div class="fgrid">
+        <div class="fg full">
+          <label>Practice Name *</label>
+          <input id="f_practice" placeholder="Bright Smile Dental" required>
+        </div>
+        <div class="fg">
+          <label>Dentist Name *</label>
+          <input id="f_dentist" placeholder="Dr. Sarah Chen" required>
+        </div>
+        <div class="fg">
+          <label>City, State</label>
+          <input id="f_location" placeholder="Austin, TX">
+        </div>
+        <div class="fg">
+          <label>Email</label>
+          <input id="f_email" type="email" placeholder="office@brightsmile.com">
+        </div>
+        <div class="fg">
+          <label>Phone</label>
+          <input id="f_phone" placeholder="(512) 555-0142">
+        </div>
+        <div class="fg">
+          <label>Google Rating</label>
+          <input id="f_stars" placeholder="3.2 or N/A">
+        </div>
+        <div class="fg">
+          <label>Pain Point</label>
+          <select id="f_issue">
+            <option value="response">Slow Response Time</option>
+            <option value="nobooking">No Online Booking</option>
+            <option value="new">New Practice</option>
+            <option value="cx">Poor Customer Service</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Status</label>
+          <select id="f_status">
+            <option value="new">New Target</option>
+            <option value="emailed">Emailed</option>
+            <option value="responded">Responded</option>
+            <option value="booked">Booked</option>
+            <option value="closed">Closed</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Last Contacted</label>
+          <input id="f_contacted" type="date">
+        </div>
+        <div class="fg full">
+          <label>Notes</label>
+          <textarea id="f_notes" placeholder="Any details — best time to call, referral source, follow-up needed…"></textarea>
+        </div>
+      </div>
+      <div class="faction">
+        <button type="button" class="btn btn-ghost" onclick="closeAdd()">Cancel</button>
+        <button type="submit" class="btn btn-mint">Save Lead</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- EMAIL TEMPLATE MODAL -->
+<div class="overlay" id="emailModal">
+  <div class="modal modal-wide">
+    <div class="mhead">
+      <div class="mtitle">📧 Outreach Email Template</div>
+      <button class="mclose" onclick="closeEmail()">✕</button>
+    </div>
+
+    <div style="margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <div class="fg" style="flex:1;min-width:160px;">
+        <label>Customize for Lead</label>
+        <select id="emailLeadSelect" onchange="generateEmail()" style="width:100%;">
+          <option value="">— Generic Template —</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="slbl">Subject Line</div>
+    <div class="subj-bar" id="emailSubject">
+      <strong>Subject:</strong> <span id="subjectText">Fill Your Calendar in 7 Days — No Hiring Required | NexSolution</span>
+    </div>
+
+    <div class="copy-row">
+      <div class="slbl">Email Body</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="copied-toast" id="copiedMsg">Copied!</span>
+        <button class="btn btn-email btn-sm" onclick="copyEmail()">📋 Copy Email</button>
+      </div>
+    </div>
+    <div class="email-body" id="emailBody"></div>
+
+    <div class="divider"></div>
+    <div style="font-size:12px;color:var(--text-muted);line-height:1.6;">
+      💡 <strong style="color:var(--text);">Tip:</strong> Select a lead from the dropdown above to auto-personalize the email. Then copy it into Gmail and send directly to their office email.
+    </div>
+  </div>
+</div>
+
+<!-- VIEW LEAD MODAL -->
+<div class="overlay" id="viewModal">
+  <div class="modal modal-wide">
+    <div class="mhead">
+      <div class="mtitle" id="vTitle">Lead Details</div>
+      <button class="mclose" onclick="closeView()">✕</button>
+    </div>
+    <div id="vBody"></div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+const STORE_KEY = 'nex_leads_v2';
+let currentTab = 'all';
+let editingId = null;
+
+const EXAMPLE_LEADS = [
+  {id:1,practice:'Bright Smile Dental',dentist:'Dr. Sarah Chen',location:'Austin, TX',email:'info@brightsmileatx.com',phone:'(512) 555-0142',stars:'3.2',issue:'nobooking',status:'new',contacted:'',notes:'Google listing active. No "Book Now" button on their website.',example:true},
+  {id:2,practice:'Mitchell Family Dentistry',dentist:'Dr. James Mitchell',location:'Phoenix, AZ',email:'front@mitchelldental.com',phone:'(602) 555-0387',stars:'2.8',issue:'response',status:'new',contacted:'',notes:'Multiple reviews mention: "Called 3 times, no callback."',example:true},
+  {id:3,practice:'Patel Dental Care',dentist:'Dr. Priya Patel',location:'Houston, TX',email:'hello@pateldental.com',phone:'(713) 555-0219',stars:'N/A',issue:'new',status:'new',contacted:'',notes:'Practice opened Jan 2026. Minimal online presence. Great opportunity.',example:true},
+  {id:4,practice:'Johnson Dental Studio',dentist:'Dr. Marcus Johnson',location:'Atlanta, GA',email:'studio@johnsondds.com',phone:'(404) 555-0563',stars:'3.0',issue:'cx',status:'new',contacted:'',notes:'Reviews say great work but front desk is disorganized.',example:true},
+  {id:5,practice:'Torres Dental',dentist:'Dr. Lisa Torres',location:'Miami, FL',email:'office@torresdental.com',phone:'(305) 555-0741',stars:'3.5',issue:'nobooking',status:'new',contacted:'',notes:'Website is outdated. Facebook page active but no booking link.',example:true},
+  {id:6,practice:'Park Dental Group',dentist:'Dr. Kevin Park',location:'Chicago, IL',email:'drpark@parkdentalchi.com',phone:'(312) 555-0096',stars:'2.5',issue:'response',status:'new',contacted:'',notes:'Yelp: "Tried booking online — couldn\'t find how." Office voicemail full.',example:true},
+  {id:7,practice:'Williams Smile Center',dentist:'Dr. Amanda Williams',location:'Charlotte, NC',email:'info@williamssmile.com',phone:'(704) 555-0318',stars:'N/A',issue:'new',status:'new',contacted:'',notes:'New solo practice. Graduated 2024. Instagram active — good warm lead.',example:true},
+  {id:8,practice:'Davis Family Dental',dentist:'Dr. Robert Davis',location:'Denver, CO',email:'front@davisfamilydds.com',phone:'(720) 555-0452',stars:'2.9',issue:'cx',status:'new',contacted:'',notes:'Reviews: great with kids but hard to reschedule. No call-back system.',example:true},
+  {id:9,practice:'Brown Dental Arts',dentist:'Dr. Stephanie Brown',location:'Las Vegas, NV',email:'hello@browndds.com',phone:'(702) 555-0667',stars:'3.1',issue:'nobooking',status:'new',contacted:'',notes:'No online booking. Accepts walk-ins only. Losing patients to competitors.',example:true},
+  {id:10,practice:'Thompson Dental',dentist:'Dr. Michael Thompson',location:'Nashville, TN',email:'office@thompsondental.co',phone:'(615) 555-0833',stars:'3.3',issue:'response',status:'new',contacted:'',notes:'Slow response confirmed: Google Q&A shows patients asking about appointments.',example:true},
+  {id:11,practice:'Rodriguez Dental Clinic',dentist:'Dr. Carmen Rodriguez',location:'San Antonio, TX',email:'clinic@rodriguezdds.com',phone:'(210) 555-0174',stars:'2.7',issue:'nobooking',status:'new',contacted:'',notes:'Spanish-English bilingual practice. No booking system at all.',example:true},
+  {id:12,practice:'Kim Advanced Dentistry',dentist:'Dr. David Kim',location:'Seattle, WA',email:'drkim@kimadvdental.com',phone:'(206) 555-0529',stars:'N/A',issue:'new',status:'new',contacted:'',notes:'New practice, opened Aug 2026. LinkedIn profile fresh. Perfect time to reach out.',example:true},
+];
+
+function getLeads(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  const seeded = EXAMPLE_LEADS.map(l=>({...l}));
+  saveLeads(seeded);
+  return seeded;
+}
+
+function saveLeads(leads){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(leads)); }catch(e){}
+}
+
+let leads = getLeads();
+let nextId = Math.max(...leads.map(l=>l.id), 0) + 1;
+
+// ─── HELPERS ────────────────────────────────────────────────────────────────
+const ISSUE_LABELS = {response:'Slow Response',nobooking:'No Online Booking',new:'New Practice',cx:'Poor CX'};
+const ISSUE_CLASS  = {response:'i-resp',nobooking:'i-book',new:'i-new',cx:'i-cx'};
+const STATUS_LABELS = {new:'New Target',emailed:'Emailed',responded:'Responded',booked:'Booked',closed:'Closed'};
+const STATUS_CLASS  = {new:'b-new',emailed:'b-emailed',responded:'b-responded',booked:'b-booked',closed:'b-closed'};
+
+function fmtDate(d){ if(!d) return '—'; const p=d.split('-'); return `${p[1]}/${p[2]}/${p[0]}`; }
+
+// ─── STATS ──────────────────────────────────────────────────────────────────
+function renderStats(){
+  const total = leads.length;
+  const emailed = leads.filter(l=>['emailed','responded','booked'].includes(l.status)).length;
+  const responded = leads.filter(l=>['responded','booked'].includes(l.status)).length;
+  const booked = leads.filter(l=>l.status==='booked').length;
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat"><div class="stat-lbl">Total Leads</div><div class="stat-val c-mint">${total}</div></div>
+    <div class="stat"><div class="stat-lbl">Emailed</div><div class="stat-val c-yellow">${emailed}</div></div>
+    <div class="stat"><div class="stat-lbl">Responded</div><div class="stat-val c-orange">${responded}</div></div>
+    <div class="stat"><div class="stat-lbl">Booked</div><div class="stat-val c-green">${booked}</div></div>
+  `;
+}
+
+// ─── TABLE ──────────────────────────────────────────────────────────────────
+function renderTable(){
+  const q = document.getElementById('search').value.toLowerCase();
+  let filtered = leads.filter(l=>{
+    if(currentTab !== 'all' && l.status !== currentTab) return false;
+    if(q && ![l.practice,l.dentist,l.location,l.email].join(' ').toLowerCase().includes(q)) return false;
+    return true;
+  });
+  document.getElementById('leadCount').textContent = `${filtered.length} lead${filtered.length!==1?'s':''}`;
+  const tb = document.getElementById('tBody');
+  if(!filtered.length){
+    tb.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="empty-icon">🦷</div><div>No leads match this filter.</div></td></tr>`;
+    return;
+  }
+  tb.innerHTML = filtered.map(l=>`
+    <tr>
+      <td>
+        <div class="pname">${esc(l.practice)} ${l.example?'<span style="font-size:10px;color:var(--text-muted);font-weight:400;">(example)</span>':''}</div>
+        <div class="psub">${esc(l.dentist)}</div>
+      </td>
+      <td class="contact">${esc(l.location||'—')}</td>
+      <td>
+        <div class="contact">${esc(l.phone||'—')}</div>
+        <div class="cemail">${esc(l.email||'—')}</div>
+      </td>
+      <td><span class="iss ${ISSUE_CLASS[l.issue]||''}">${ISSUE_LABELS[l.issue]||l.issue}</span></td>
+      <td><span class="${l.stars==='N/A'?'stars na':'stars'}">⭐ ${esc(l.stars||'—')}</span></td>
+      <td><span class="badge ${STATUS_CLASS[l.status]||''}">${STATUS_LABELS[l.status]||l.status}</span></td>
+      <td class="contact">${fmtDate(l.contacted)}</td>
+      <td>
+        <div class="actions">
+          <button class="btn btn-email btn-sm" onclick="openEmailFor(${l.id})">✉</button>
+          <button class="btn btn-ghost btn-sm" onclick="openEdit(${l.id})">Edit</button>
+          <button class="btn btn-red btn-sm" onclick="deleteLead(${l.id})">✕</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function setTab(tab, el){
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderTable();
+}
+
+// ─── ADD / EDIT ──────────────────────────────────────────────────────────────
+function openAdd(){
+  editingId = null;
+  document.getElementById('modalTitle').textContent = 'Add New Lead';
+  ['practice','dentist','location','email','phone','stars','notes'].forEach(f=>{ document.getElementById('f_'+f).value=''; });
+  document.getElementById('f_issue').value='nobooking';
+  document.getElementById('f_status').value='new';
+  document.getElementById('f_contacted').value='';
+  document.getElementById('addModal').hidden = false;
+}
+
+function openEdit(id){
+  const l = leads.find(x=>x.id===id);
+  if(!l) return;
+  editingId = id;
+  document.getElementById('modalTitle').textContent = 'Edit Lead';
+  document.getElementById('f_practice').value = l.practice||'';
+  document.getElementById('f_dentist').value  = l.dentist||'';
+  document.getElementById('f_location').value = l.location||'';
+  document.getElementById('f_email').value    = l.email||'';
+  document.getElementById('f_phone').value    = l.phone||'';
+  document.getElementById('f_stars').value    = l.stars||'';
+  document.getElementById('f_issue').value    = l.issue||'nobooking';
+  document.getElementById('f_status').value   = l.status||'new';
+  document.getElementById('f_contacted').value= l.contacted||'';
+  document.getElementById('f_notes').value    = l.notes||'';
+  document.getElementById('addModal').hidden  = false;
+}
+
+function closeAdd(){ document.getElementById('addModal').hidden = true; }
+
+document.getElementById('leadForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const data = {
+    practice:  document.getElementById('f_practice').value.trim(),
+    dentist:   document.getElementById('f_dentist').value.trim(),
+    location:  document.getElementById('f_location').value.trim(),
+    email:     document.getElementById('f_email').value.trim(),
+    phone:     document.getElementById('f_phone').value.trim(),
+    stars:     document.getElementById('f_stars').value.trim(),
+    issue:     document.getElementById('f_issue').value,
+    status:    document.getElementById('f_status').value,
+    contacted: document.getElementById('f_contacted').value,
+    notes:     document.getElementById('f_notes').value.trim(),
+    example:   false,
+  };
+  if(editingId){
+    const idx = leads.findIndex(l=>l.id===editingId);
+    if(idx>=0) leads[idx] = {...leads[idx],...data};
+  } else {
+    data.id = nextId++;
+    leads.push(data);
+  }
+  saveLeads(leads);
+  closeAdd();
+  renderStats();
+  renderTable();
+  populateEmailLeadSelect();
+});
+
+function deleteLead(id){
+  leads = leads.filter(l=>l.id!==id);
+  saveLeads(leads);
+  renderStats();
+  renderTable();
+  populateEmailLeadSelect();
+}
+
+// ─── EMAIL TEMPLATE ──────────────────────────────────────────────────────────
+const PAIN_LINES = {
+  response: 'patients have mentioned difficulty reaching your office for appointments',
+  nobooking: "your practice doesn't yet offer online booking — which often means missed opportunities outside office hours",
+  new: "you're building your patient base as a newer practice in the area",
+  cx: "patients love your clinical skills but mention they'd appreciate faster, more seamless communication"
+};
+
+function buildEmail(l){
+  const lastName = l ? (l.dentist||'').replace(/^Dr\.\s*/i,'').split(' ').slice(-1)[0] : '[Last Name]';
+  const practice = l ? l.practice : '[Practice Name]';
+  const painLine = l ? (PAIN_LINES[l.issue]||PAIN_LINES.nobooking) : "your patients could benefit from faster scheduling and communication";
+  return `Hi Dr. ${lastName},
+
+I hope this message finds you well. I came across ${practice} and noticed ${painLine}.
+
+My name is Calisa Hackshaw, and I'm the founder of NexSolution — we specialize in appointment management and patient communication for dental practices exactly like yours.
+
+Here's what we handle for you:
+
+• Respond to ALL patient inquiries within minutes, not days
+• Fill your schedule by managing your calendar end-to-end
+• Follow up with leads who haven't booked yet
+• Reduce no-shows with automated patient reminders
+• Set up streamlined booking so patients can schedule 24/7
+
+Most practices see a fully booked calendar within 7 days of onboarding.
+
+There's no hiring, no training, and no long-term contract. We work as your behind-the-scenes practice management team — so you can stay focused on delivering great dental care.
+
+I'd love to show you how we can do the same for ${practice}. Would you be open to a quick 15-minute call this week?
+
+👉 Book your free consultation: https://nexsolution.org/#contact
+
+Warm regards,
+Calisa Hackshaw
+Founder, NexSolution
+supportnexsolution@gmail.com`;
+}
+
+function buildSubject(l){
+  if(!l) return 'Fill Your Calendar in 7 Days — No Hiring Required | NexSolution';
+  const map = {
+    response: `Dr. ${(l.dentist||'').replace(/^Dr\.\s*/i,'').split(' ').slice(-1)[0]}, never miss a patient call again | NexSolution`,
+    nobooking: `${l.practice}: Add Online Booking in 7 Days — No Tech Required`,
+    new: `Grow ${l.practice} faster — done-for-you patient scheduling`,
+    cx: `Your patients love your work — let us handle the scheduling | NexSolution`,
+  };
+  return map[l.issue] || 'Fill Your Calendar in 7 Days — No Hiring Required | NexSolution';
+}
+
+function populateEmailLeadSelect(){
+  const sel = document.getElementById('emailLeadSelect');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">— Generic Template —</option>' +
+    leads.map(l=>`<option value="${l.id}">${esc(l.practice)} — ${esc(l.dentist)}</option>`).join('');
+  if(cur) sel.value = cur;
+}
+
+function generateEmail(){
+  const sel = document.getElementById('emailLeadSelect');
+  const id = parseInt(sel.value);
+  const l = id ? leads.find(x=>x.id===id) : null;
+  document.getElementById('subjectText').textContent = buildSubject(l);
+  document.getElementById('emailBody').textContent = buildEmail(l);
+}
+
+function openEmailTemplate(){
+  populateEmailLeadSelect();
+  generateEmail();
+  document.getElementById('emailModal').hidden = false;
+}
+
+function openEmailFor(id){
+  populateEmailLeadSelect();
+  document.getElementById('emailLeadSelect').value = id;
+  generateEmail();
+  document.getElementById('emailModal').hidden = false;
+}
+
+function closeEmail(){ document.getElementById('emailModal').hidden = true; }
+
+function copyEmail(){
+  const subject = document.getElementById('subjectText').textContent;
+  const body = document.getElementById('emailBody').textContent;
+  const full = `Subject: ${subject}\n\n${body}`;
+  navigator.clipboard.writeText(full).then(()=>{
+    showCopied();
+  }).catch(()=>{
+    const el = document.getElementById('emailBody');
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    showCopied();
+  });
+}
+
+function showCopied(){
+  const t = document.getElementById('copiedMsg');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2000);
+}
+
+function closeView(){ document.getElementById('viewModal').hidden = true; }
+
+// ─── PASSWORD GATE ───────────────────────────────────────────────────────────
+(function(){
+  const PASS = 'nex2026';
+  const SESSION_KEY = 'nex_auth';
+  if(sessionStorage.getItem(SESSION_KEY) === '1') return;
+  document.body.style.display = 'none';
+  const entered = prompt('NexSolution Dashboard — Enter access code:');
+  if(entered === PASS){
+    sessionStorage.setItem(SESSION_KEY,'1');
+    document.body.style.display = '';
+  } else {
+    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:Inter,sans-serif;color:#6b8fa8;font-size:14px;">Access denied. Refresh to try again.</div>';
+    document.body.style.display = '';
+  }
+})();
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+document.getElementById('addModal').hidden = true;
+document.getElementById('emailModal').hidden = true;
+document.getElementById('viewModal').hidden = true;
+
+renderStats();
+renderTable();
+</script>
+</body>
+</html>

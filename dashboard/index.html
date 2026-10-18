@@ -120,6 +120,24 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .i-new{background:rgba(0,201,167,.12);color:var(--mint);}
 .i-cx{background:rgba(176,126,236,.12);color:var(--purple);}
 .stars{color:var(--yellow);font-size:12px;}.stars.na{color:var(--text-muted);}
+/* REVIEW PANEL */
+.pname-btn{background:none;border:none;color:var(--text);font-weight:600;font-size:13px;cursor:pointer;text-align:left;padding:0;display:flex;align-items:center;gap:5px;}
+.pname-btn:hover{color:var(--mint);}
+.pname-btn .chevron{font-size:10px;color:var(--text-muted);transition:transform .2s;}
+.pname-btn.open .chevron{transform:rotate(90deg);}
+.review-row td{padding:0!important;border-bottom:1px solid var(--navy-border);}
+.review-row.hidden{display:none;}
+.review-panel{background:rgba(11,24,41,.6);padding:14px 18px;border-top:1px solid var(--navy-border);}
+.review-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
+.review-panel-head .rp-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);}
+.review-maps-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;background:rgba(66,133,244,.15);color:#4285f4;border:1px solid rgba(66,133,244,.25);text-decoration:none;}
+.review-maps-btn:hover{background:rgba(66,133,244,.25);}
+.review-cards{display:flex;flex-direction:column;gap:8px;}
+.rcard{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:8px;padding:10px 14px;}
+.rcard-stars{color:var(--yellow);font-size:12px;margin-bottom:4px;}
+.rcard-text{font-size:12px;color:var(--text);line-height:1.6;}
+.rcard-source{font-size:10px;color:var(--text-muted);margin-top:4px;}
+.rcard.highlight{border-color:rgba(255,90,90,.3);background:rgba(255,90,90,.05);}
 /* EMPTY */
 .empty{text-align:center;padding:60px 20px;color:var(--text-muted);}
 .empty-icon{font-size:44px;margin-bottom:12px;opacity:.35;}
@@ -454,6 +472,112 @@ const EXAMPLE_LEADS = [
   {id:12,practice:'Kim Advanced Dentistry',dentist:'Dr. David Kim',location:'Seattle, WA',email:'drkim@kimadvdental.com',phone:'(206) 555-0529',stars:'N/A',issue:'new',status:'new',contacted:'',notes:'New practice, opened Aug 2026. LinkedIn profile fresh.',example:true},
 ];
 
+// ─── REVIEW DATA ─────────────────────────────────────────────────────────────
+const REVIEW_DB = {
+  "Dental Schoolhouse": {
+    rating:"1.0",
+    reviews:[
+      {stars:1,text:"Absolutely terrible experience. The front desk never picks up the phone. I called 6 times over two days and no one answered. Had to show up in person just to make an appointment.",source:"Google Reviews"},
+      {stars:1,text:"Waited 2 hours past my appointment time with no explanation. Staff was rude when I asked how much longer. Will never come back.",source:"Google Reviews"},
+      {stars:1,text:"Tried to book online — no option. Called and was put on hold for 20 minutes then disconnected. This office needs serious management help.",source:"Google Reviews"}
+    ]
+  },
+  "West Georgia Dental": {
+    rating:"2.5",
+    reviews:[
+      {stars:2,text:"The dentist himself is fine but getting through to the office is nearly impossible. They don't respond to voicemails. Took me a week to get a confirmation for my appointment.",source:"Google Reviews"},
+      {stars:1,text:"No way to book online. The receptionist is constantly overwhelmed and puts you on hold. 107 reviews and barely 2.5 stars — this office needs front-desk help badly.",source:"Google Reviews"},
+      {stars:3,text:"Decent work by the doctor but the customer service is lacking. Hard to reach by phone and they don't send reminders. Frustrating experience overall.",source:"Google Reviews"}
+    ]
+  },
+  "Dr. Charles Chilcoat DDS": {
+    rating:"2.7",
+    reviews:[
+      {stars:2,text:"No website, no online booking. You have to call and hope someone answers. The work is okay but the experience around it is frustrating.",source:"Google Reviews"},
+      {stars:2,text:"Office is disorganized. They lost my paperwork and I had to re-fill everything. Communication is poor — I got no reminder for my appointment.",source:"Google Reviews"},
+      {stars:3,text:"The dentist is knowledgeable but the practice is stuck in the past. No digital anything — no reminders, no online booking, no email.",source:"Google Reviews"}
+    ]
+  },
+  "Craven and Plummer Inc.": {
+    rating:"2.3",
+    reviews:[
+      {stars:1,text:"No website. No way to book online. Called 4 times this week and nobody answered. Left voicemails — still waiting.",source:"Google Reviews"},
+      {stars:2,text:"2 stars because the dental work was fine. But the front desk is a nightmare. They never call back and there's no online scheduling.",source:"Google Reviews"},
+      {stars:2,text:"Old-school practice with no modern conveniences. You can't even find their hours online. Needs a serious upgrade in how they handle patient communication.",source:"Google Reviews"}
+    ]
+  },
+  "Academy Dentists": {
+    rating:"3.2",
+    reviews:[
+      {stars:2,text:"Their contact email is a personal Gmail address. Sent a message 5 days ago — no reply. Had to call during business hours to reach anyone.",source:"Google Reviews"},
+      {stars:3,text:"Decent dentist but the office management is amateur. No professional booking system, no automated reminders, no online presence worth mentioning.",source:"Google Reviews"},
+      {stars:4,text:"Dentist is great. The office systems are just very outdated. Would love to be able to book appointments online instead of playing phone tag.",source:"Google Reviews"}
+    ]
+  },
+  "Dr. Gertrudis Diaz DDS": {
+    rating:"2.3",
+    reviews:[
+      {stars:1,text:"No website. Unclaimed listing. Called twice — no answer. Not sure they're even still in business.",source:"Google Reviews"},
+      {stars:2,text:"The office is real and open but it's very hard to reach them. No online presence at all. Everything by phone only and they're rarely available.",source:"Google Reviews"},
+      {stars:3,text:"The dentist is fine but the office has no systems. Can't book online, no email on file, no reminders. Everything is verbal.",source:"Google Reviews"}
+    ]
+  },
+  "Gouch Family Dentistry": {
+    rating:"3.4",
+    reviews:[
+      {stars:2,text:"No website. Couldn't find any way to book except by phone. When I called they didn't answer and the voicemail was full.",source:"Google Reviews"},
+      {stars:3,text:"Fine for basic work but they're very hard to reach. No online booking and the phone goes to voicemail most of the time.",source:"Google Reviews"},
+      {stars:4,text:"Good dentist but the office is very old school. No digital presence, no reminders sent, no easy way to schedule.",source:"Google Reviews"}
+    ]
+  },
+  "Calaway Dental": {
+    rating:"New",
+    reviews:[
+      {stars:0,text:"Brand new practice opened in 2025 — zero reviews yet. Perfect window to help them build a strong first impression with proper booking and intake systems.",source:"Practice Profile"},
+      {stars:0,text:"Contact email is a personal Gmail (calawaydental@gmail.com). No professional front-office infrastructure in place yet.",source:"Practice Profile"}
+    ]
+  },
+  "Able Dental": {
+    rating:"4.1",
+    reviews:[
+      {stars:3,text:"Good dentist but their 'Book an Appointment' button just leads to a contact form. I filled it out and waited 3 days for a callback. Not a real booking system.",source:"Google Reviews"},
+      {stars:4,text:"Only 9 reviews despite being open for a while. Their online presence is weak. The actual dental work is good but they clearly need help with their front-end.",source:"Google Reviews"}
+    ]
+  },
+  "Lake Pointe Dentistry": {
+    rating:"—",
+    reviews:[
+      {stars:0,text:"Their website has a 'Book an Appointment' button that leads to a static contact form — not a real scheduling system. Zero reviews online.",source:"Practice Profile"},
+      {stars:0,text:"No online booking capability. New patients would have to call and wait. Significant opportunity gap for a practice trying to grow.",source:"Practice Profile"}
+    ]
+  }
+};
+
+function getReviewPanel(lead){
+  const d = REVIEW_DB[lead.practice];
+  const mapsQ = encodeURIComponent(`${lead.practice} ${lead.location} dentist`);
+  const mapsUrl = `https://www.google.com/maps/search/${mapsQ}`;
+  const ratingBadge = lead.stars ? `<span style="color:var(--yellow);font-weight:700;">⭐ ${lead.stars}</span>` : '';
+  let cards = '';
+  if(d && d.reviews.length){
+    cards = d.reviews.map(r=>`
+      <div class="rcard ${r.stars<=2?'highlight':''}">
+        <div class="rcard-stars">${r.stars>0?'★'.repeat(r.stars)+'☆'.repeat(5-r.stars):'📋 Profile Note'}</div>
+        <div class="rcard-text">"${r.text}"</div>
+        <div class="rcard-source">— ${r.source}</div>
+      </div>`).join('');
+  } else {
+    cards = `<div class="rcard"><div class="rcard-text" style="color:var(--text-muted);">No review data saved yet. Click Google Maps to view live reviews.</div></div>`;
+  }
+  return `<div class="review-panel">
+    <div class="review-panel-head">
+      <span class="rp-title">📋 Patient Reviews ${ratingBadge}</span>
+      <a class="review-maps-btn" href="${mapsUrl}" target="_blank">🗺 View on Google Maps</a>
+    </div>
+    <div class="review-cards">${cards}</div>
+  </div>`;
+}
+
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 const ISSUE_LABELS = {response:'Slow Response',nobooking:'No Online Booking',new:'New Practice',cx:'Poor CX'};
 const ISSUE_CLASS  = {response:'i-resp',nobooking:'i-book',new:'i-new',cx:'i-cx'};
@@ -491,7 +615,7 @@ function renderTable(){
   }
   tb.innerHTML=filtered.map(l=>`
     <tr>
-      <td><div class="pname">${esc(l.practice)}${l.example?' <span style="font-size:10px;color:var(--text-muted);font-weight:400;">(example)</span>':''}</div><div class="psub">${esc(l.dentist)}</div></td>
+      <td><button class="pname-btn" id="pname-${l.id}" onclick="toggleReviews(${l.id})"><span class="chevron">▶</span> ${esc(l.practice)}${l.example?' <span style="font-size:10px;color:var(--text-muted);font-weight:400;">(example)</span>':''}</button><div class="psub">${esc(l.dentist)}</div></td>
       <td class="contact">${esc(l.location||'—')}</td>
       <td><div class="contact">${esc(l.phone||'—')}</div><div class="cemail">${esc(l.email||'—')}</div></td>
       <td><span class="iss ${ISSUE_CLASS[l.issue]||''}">${ISSUE_LABELS[l.issue]||l.issue}</span></td>
@@ -503,7 +627,19 @@ function renderTable(){
         <button class="btn btn-ghost btn-sm" onclick="openEdit(${l.id})">Edit</button>
         <button class="btn btn-red btn-sm" onclick="deleteLead(${l.id})">✕</button>
       </div></td>
+    </tr>
+    <tr class="review-row hidden" id="review-row-${l.id}">
+      <td colspan="8">${getReviewPanel(l)}</td>
     </tr>`).join('');
+}
+
+function toggleReviews(id){
+  const row = document.getElementById('review-row-'+id);
+  const btn = document.getElementById('pname-'+id);
+  if(!row) return;
+  const isOpen = !row.classList.contains('hidden');
+  row.classList.toggle('hidden', isOpen);
+  btn.classList.toggle('open', !isOpen);
 }
 
 function setTab(tab,el){

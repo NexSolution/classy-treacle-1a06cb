@@ -1,0 +1,566 @@
+<title>NexSolution Onboarding</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap">
+
+<style>
+/* ─── tokens ─── */
+:root {
+  --navy:    #0B1829;
+  --mint:    #00C9A7;
+  --mint-dk: #00A88A;
+  --bg:      #ffffff;
+  --bg2:     #F2F6FA;
+  --bg3:     #E6EEF6;
+  --fg:      #0B1829;
+  --fg2:     #4A5E72;
+  --card:    #ffffff;
+  --border:  #D8E4EF;
+  --shadow:  0 2px 16px rgba(11,24,41,.08);
+  --r:       14px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:     #0B1829;
+    --bg2:    #0F2138;
+    --bg3:    #162a44;
+    --fg:     #E8F3FF;
+    --fg2:    #8AACC8;
+    --card:   #0F2138;
+    --border: #1E3554;
+    --shadow: 0 2px 16px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:     #0B1829;
+  --bg2:    #0F2138;
+  --bg3:    #162a44;
+  --fg:     #E8F3FF;
+  --fg2:    #8AACC8;
+  --card:   #0F2138;
+  --border: #1E3554;
+  --shadow: 0 2px 16px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+
+/* ─── reset / base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* ─── typography ─── */
+h1,h2,h3,h4 { font-family: 'Syne', sans-serif; line-height: 1.18; text-wrap: balance; }
+.display { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; letter-spacing: -.02em; }
+.section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--mint);
+}
+
+/* ─── layout helpers ─── */
+.wrap {
+  max-width: 880px;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+.wrap-wide {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  background: var(--navy);
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--navy);
+  z-index: 101;
+}
+.nav-inner {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px));
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+}
+.logo-mark {
+  width: 32px; height: 32px;
+  background: var(--mint);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.logo-mark svg { width: 18px; height: 18px; }
+.logo-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  letter-spacing: .01em;
+}
+.nav-tag {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--navy);
+  padding: clamp(60px, 10vw, 100px) max(24px, env(safe-area-inset-left, 0px));
+  padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px));
+  text-align: center;
+}
+.hero .pill {
+  display: inline-block;
+  background: rgba(0,201,167,.15);
+  color: var(--mint);
+  font-size: .75rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(0,201,167,.25);
+}
+.hero h1 { color: #fff; margin-bottom: 16px; }
+.hero h1 span { color: var(--mint); }
+.hero p {
+  color: rgba(255,255,255,.6);
+  font-size: 1.1rem;
+  max-width: 560px;
+  margin-inline: auto;
+  margin-bottom: 36px;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--mint);
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: .95rem;
+  padding: 13px 28px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+}
+.hero-cta:hover { background: var(--mint-dk); transform: translateY(-1px); }
+
+/* ─── INTRO STRIP ─── */
+.intro {
+  background: var(--bg2);
+  padding: 48px max(24px, env(safe-area-inset-left, 0px));
+  padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px));
+}
+.intro .wrap { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+.intro h2 { font-size: clamp(1.3rem, 3vw, 1.75rem); }
+.intro p { color: var(--fg2); max-width: 600px; font-size: 1.02rem; }
+
+/* ─── STEPS ─── */
+.steps-section {
+  padding: clamp(48px, 8vw, 80px) max(24px, env(safe-area-inset-left, 0px));
+  padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px));
+}
+.steps-section > .wrap > .section-label { margin-bottom: 12px; }
+.steps-section > .wrap > h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); margin-bottom: 48px; }
+.steps { display: flex; flex-direction: column; gap: 20px; }
+.step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px 28px 28px 24px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.step::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--mint);
+}
+.step-num {
+  width: 44px; height: 44px;
+  background: rgba(0,201,167,.12);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--mint);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-body { min-width: 0; }
+.step-body h3 {
+  font-size: 1.12rem;
+  margin-bottom: 8px;
+  color: var(--fg);
+}
+.step-body p { color: var(--fg2); font-size: .95rem; line-height: 1.65; }
+.step-tag {
+  display: inline-block;
+  background: rgba(0,201,167,.1);
+  color: var(--mint-dk);
+  font-size: .7rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 100px;
+  margin-top: 10px;
+  border: 1px solid rgba(0,201,167,.2);
+}
+
+/* dark mode tag text */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .step-tag { color: var(--mint); }
+}
+:root[data-theme="dark"] .step-tag { color: var(--mint); }
+
+/* ─── WHAT WE NEED ─── */
+.needs-section {
+  background: var(--bg2);
+  padding: clamp(48px, 8vw, 72px) max(24px, env(safe-area-inset-left, 0px));
+  padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px));
+}
+.needs-section > .wrap > .section-label { margin-bottom: 12px; }
+.needs-section > .wrap > h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); margin-bottom: 32px; }
+.needs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+.need-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: var(--shadow);
+}
+.need-icon {
+  width: 38px; height: 38px;
+  background: rgba(0,201,167,.12);
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+.need-card p { font-size: .9rem; color: var(--fg2); line-height: 1.5; }
+.need-card strong { display: block; font-size: .95rem; color: var(--fg); margin-bottom: 2px; }
+
+/* ─── PRICING NOTE ─── */
+.pricing-section {
+  padding: clamp(48px, 8vw, 72px) max(24px, env(safe-area-inset-left, 0px));
+  padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px));
+}
+.pricing-section > .wrap > .section-label { margin-bottom: 12px; }
+.pricing-section > .wrap > h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); margin-bottom: 32px; }
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.pc {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.pc h4 { font-size: 1rem; margin-bottom: 6px; }
+.pc .price {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--mint);
+  margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.pc p { font-size: .88rem; color: var(--fg2); line-height: 1.55; }
+.pc.featured { background: var(--navy); border-color: var(--mint); }
+.pc.featured h4, .pc.featured .price { color: #fff; }
+.pc.featured .price { color: var(--mint); }
+.pc.featured p { color: rgba(255,255,255,.55); }
+
+/* ─── CTA ─── */
+.cta-section {
+  background: var(--navy);
+  padding: clamp(60px, 10vw, 90px) max(24px, env(safe-area-inset-left, 0px));
+  padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px));
+  text-align: center;
+}
+.cta-section h2 { color: #fff; font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: 14px; }
+.cta-section p { color: rgba(255,255,255,.55); font-size: 1rem; max-width: 480px; margin-inline: auto; margin-bottom: 32px; }
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--mint);
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background .2s;
+}
+.cta-btn:hover { background: var(--mint-dk); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 28px max(24px, env(safe-area-inset-left, 0px));
+  padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px));
+  text-align: center;
+}
+footer p { font-size: .82rem; color: var(--fg2); }
+footer a { color: var(--mint); text-decoration: none; }
+
+/* ─── responsive ─── */
+@media (max-width: 520px) {
+  .step { grid-template-columns: 1fr; gap: 14px 0; }
+  .step-num { width: 36px; height: 36px; font-size: .9rem; }
+}
+</style>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="https://nexsolution.org">
+      <div class="logo-mark">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 14L9 4l6 10H3z" fill="#0B1829"/>
+          <circle cx="9" cy="13" r="2.5" fill="#0B1829"/>
+        </svg>
+      </div>
+      <span class="logo-name">NexSolution</span>
+    </a>
+    <span class="nav-tag">Client Onboarding</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="pill">Dental Practice Growth Partnership</div>
+  <h1 class="display">Your Practice,<br><span>Fully Managed.</span></h1>
+  <p>Everything you need to grow your patient base, fill your schedule, and build a visible, trusted presence — handled by our team, on your behalf.</p>
+  <a class="hero-cta" href="https://nexsolution.org/#contact">
+    Book Your Free Consultation
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="wrap">
+    <h2>Here's how the partnership works</h2>
+    <p>From the moment you sign on, we become your behind-the-scenes team. You focus on patient care — we handle everything else.</p>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps-section">
+  <div class="wrap">
+    <div class="section-label">The Process</div>
+    <h2>7 Things We Do For You</h2>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Instagram Presence</h3>
+          <p>Your clinic needs an active Instagram page. If you already have one, great — we take it from there. If not, we'll guide you through setting it up. A strong Instagram presence is the foundation of your local visibility.</p>
+          <span class="step-tag">Requirement: Active account</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Content Creation</h3>
+          <p>You record short video clips of your practice — your team, your environment, a procedure walkthrough. We handle everything after that: editing, captions, graphics, and posting on a consistent schedule that builds your audience over time.</p>
+          <span class="step-tag">You record — we handle the rest</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Online Booking System</h3>
+          <p>Patients click your booking link, choose their service, pick a date and time, and add any notes. You receive an instant notification on your phone, approve the appointment, and the patient is confirmed. No phone tag, no back and forth — just a filled schedule. If you already have a booking system in place, we work with what you have. If not, we set up ours for you.</p>
+          <span class="step-tag">One-time setup · Lifetime access · Upgrades available</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Patient Reactivation Campaign</h3>
+          <p>Lapsed patients are one of the most cost-effective growth levers a practice has. We'll need a list of every patient seen at your clinic in the past 6 years. Our specialist will run a dedicated outreach campaign — calls, follow-ups, and reminders — to bring those patients back into your chair.</p>
+          <span class="step-tag">Requirement: 6-year patient list</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Your Dedicated Specialist</h3>
+          <p>Every clinic we work with gets one NexSolution specialist — someone who learns your practice, handles all patient-facing communication, and confirms appointments directly through your booking system. We also identify the highest-potential service in your clinic: a premium procedure that's underperforming or one that could dramatically increase revenue with the right push. We build a focused campaign around it. Consultations start at $50.</p>
+          <span class="step-tag">1 specialist per clinic · Starting at $50/consultation</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Meta Advertising Campaigns</h3>
+          <p>We plan, build, and manage your Facebook and Instagram ads — from audience targeting and creative to testing and optimization. You allocate a monthly ad budget toward your campaigns. We handle everything on the execution side so your money is working as efficiently as possible.</p>
+          <span class="step-tag">We run it · You fund the ad budget</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <h3>Shared Tracking &amp; Reporting</h3>
+          <p>Every appointment confirmed, every reactivation call made, every campaign result — logged in a live shared mastersheet. Both your team and ours have full access. You'll always know exactly what's happening and what's working, without having to ask.</p>
+          <span class="step-tag">Full visibility · Shared access</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE NEED -->
+<section class="needs-section">
+  <div class="wrap">
+    <div class="section-label">Checklist</div>
+    <h2>What We Need From You</h2>
+    <div class="needs-grid">
+      <div class="need-card">
+        <div class="need-icon">📱</div>
+        <div>
+          <strong>Instagram Account</strong>
+          <p>Active or new — we'll help you set it up if you don't have one.</p>
+        </div>
+      </div>
+      <div class="need-card">
+        <div class="need-icon">🎥</div>
+        <div>
+          <strong>Short Video Clips</strong>
+          <p>Filmed at your practice by you or a team member. No production experience needed.</p>
+        </div>
+      </div>
+      <div class="need-card">
+        <div class="need-icon">📋</div>
+        <div>
+          <strong>6-Year Patient List</strong>
+          <p>Names and contact info for all patients seen in the last 6 years.</p>
+        </div>
+      </div>
+      <div class="need-card">
+        <div class="need-icon">📅</div>
+        <div>
+          <strong>Booking System Info</strong>
+          <p>Details on your current setup — or we'll provide ours at a one-time cost.</p>
+        </div>
+      </div>
+      <div class="need-card">
+        <div class="need-icon">💰</div>
+        <div>
+          <strong>Monthly Ad Budget</strong>
+          <p>A set amount dedicated to your Meta advertising campaigns each month.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="wrap">
+    <div class="section-label">Investment</div>
+    <h2>What's Included</h2>
+    <div class="pricing-cards">
+      <div class="pc">
+        <h4>Consultation</h4>
+        <div class="price">$50+</div>
+        <p>One dedicated specialist per clinic. Covers patient communication, appointment confirmation, and campaign strategy.</p>
+      </div>
+      <div class="pc">
+        <h4>Booking System</h4>
+        <div class="price">One-Time</div>
+        <p>Set up once, yours for life. Instant mobile notifications for the doctor. Upgrades available as add-ons when you need them.</p>
+      </div>
+      <div class="pc">
+        <h4>Meta Campaigns</h4>
+        <div class="price">Your Budget</div>
+        <p>You allocate a monthly ad budget. We handle all planning, creative, targeting, and optimization on your behalf.</p>
+      </div>
+      <div class="pc featured">
+        <h4>Reactivation Campaign</h4>
+        <div class="price">Included</div>
+        <p>Full outreach to your 6-year patient list. We contact, follow up, and fill your schedule with patients who already know you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to get started?</h2>
+  <p>Book a free 15-minute consultation and we'll walk through exactly how NexSolution can be set up for your practice.</p>
+  <a class="cta-btn" href="https://nexsolution.org/#contact">
+    Book Your Free Consultation
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 NexSolution · <a href="mailto:supportnexsolution@gmail.com">supportnexsolution@gmail.com</a> · <a href="https://nexsolution.org">nexsolution.org</a></p>
+</footer>

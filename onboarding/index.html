@@ -359,6 +359,106 @@ footer {
 footer p { font-size: .82rem; color: var(--fg2); }
 footer a { color: var(--mint); text-decoration: none; }
 
+/* ─── ABOUT ─── */
+.about-section {
+  padding: clamp(56px, 9vw, 80px) max(24px, env(safe-area-inset-left, 0px));
+  padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px));
+}
+.about-section > .wrap > .section-label { margin-bottom: 12px; }
+.about-section > .wrap > h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); margin-bottom: 16px; }
+.about-lead {
+  color: var(--fg2);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 680px;
+  margin-bottom: 36px;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+.about-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.about-icon { font-size: 1.5rem; display: block; margin-bottom: 12px; }
+.about-card h4 { font-size: 1rem; margin-bottom: 8px; }
+.about-card p { font-size: .9rem; color: var(--fg2); line-height: 1.6; }
+
+/* ─── FOUNDER ─── */
+.founder-section {
+  background: var(--bg2);
+  padding: clamp(56px, 9vw, 80px) max(24px, env(safe-area-inset-left, 0px));
+  padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px));
+}
+.founder-section > .wrap > .section-label { margin-bottom: 28px; }
+.founder-inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 36px;
+  align-items: start;
+}
+.founder-avatar {
+  width: 88px; height: 88px;
+  background: var(--navy);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--mint);
+  flex-shrink: 0;
+  border: 3px solid var(--mint);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .founder-avatar { background: var(--bg3); }
+}
+:root[data-theme="dark"] .founder-avatar { background: var(--bg3); }
+.founder-bio h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); margin-bottom: 4px; }
+.founder-title {
+  color: var(--mint);
+  font-weight: 600;
+  font-size: .9rem;
+  margin-bottom: 16px;
+  letter-spacing: .02em;
+}
+.founder-bio p {
+  color: var(--fg2);
+  font-size: .95rem;
+  line-height: 1.7;
+  margin-bottom: 12px;
+  max-width: 620px;
+}
+.founder-creds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.founder-creds span {
+  background: rgba(0,201,167,.1);
+  color: var(--mint-dk);
+  border: 1px solid rgba(0,201,167,.22);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .founder-creds span { color: var(--mint); }
+}
+:root[data-theme="dark"] .founder-creds span { color: var(--mint); }
+@media (max-width: 520px) {
+  .founder-inner { grid-template-columns: 1fr; }
+  .founder-avatar { width: 68px; height: 68px; font-size: 1.1rem; }
+}
+
 /* ─── responsive ─── */
 @media (max-width: 520px) {
   .step { grid-template-columns: 1fr; gap: 14px 0; }
@@ -391,6 +491,55 @@ footer a { color: var(--mint); text-decoration: none; }
     Book Your Free Consultation
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="wrap">
+    <div class="section-label">Who We Are</div>
+    <h2>About NexSolution</h2>
+    <p class="about-lead">NexSolution is a business process outsourcing (BPO) company built specifically for independent dental practices. We step in as your behind-the-scenes growth team — managing patient communication, online presence, appointment scheduling, and advertising — so dentists can stay focused on the work that matters most: providing excellent care.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <span class="about-icon">🦷</span>
+        <h4>Built for Dental</h4>
+        <p>Everything we do is designed around the specific needs of solo and small practices — from patient reactivation to procedure-based campaign strategy.</p>
+      </div>
+      <div class="about-card">
+        <span class="about-icon">📈</span>
+        <h4>Results-Driven</h4>
+        <p>We don't just manage — we grow. Our model is built to fill calendars, increase revenue from underutilized procedures, and build lasting patient relationships.</p>
+      </div>
+      <div class="about-card">
+        <span class="about-icon">🤝</span>
+        <h4>True Partnership</h4>
+        <p>No long-term contracts, no hidden fees. We work alongside your practice as a dedicated extension of your team — as hands-on or hands-off as you need us to be.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder-section">
+  <div class="wrap">
+    <div class="section-label">The Founder</div>
+    <div class="founder-inner">
+      <div class="founder-avatar">CH</div>
+      <div class="founder-bio">
+        <h2>Calisa Hackshaw</h2>
+        <p class="founder-title">Founder &amp; CEO, NexSolution</p>
+        <p>Calisa brings a proven track record across customer support operations, appointment setting, team leadership, and digital marketing. She progressed from front-line support agent to manager at Clear Harbor, developed hands-on client engagement and CRM experience at Farashe Med &amp; Day Spa using GoHighLevel, and has built and managed paid advertising campaigns across Meta, TikTok, and Google.</p>
+        <p>NexSolution was founded on a straightforward insight: most independent dental practices are leaving revenue on the table — not because of the quality of care they deliver, but because of the systems surrounding it. Calisa built NexSolution to close that gap, combining operational efficiency with digital growth strategy into one cohesive practice management partnership.</p>
+        <div class="founder-creds">
+          <span>Certificate in Supervisory Management</span>
+          <span>Meta Advertising</span>
+          <span>CRM &amp; GoHighLevel</span>
+          <span>Customer Operations</span>
+          <span>Appointment Setting</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- INTRO -->

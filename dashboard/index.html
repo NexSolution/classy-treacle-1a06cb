@@ -192,7 +192,7 @@ textarea{resize:vertical;min-height:80px;}
 </div>
 
 <!-- SETUP BANNER (shown if no API URL yet) -->
-<div class="setup-banner" id="setupBanner">
+<div class="setup-banner hidden" id="setupBanner">
   <div class="setup-icon">⚙️</div>
   <div class="setup-text">
     <strong>One-time setup: Connect to Google Sheets</strong>
@@ -348,8 +348,9 @@ let synced = false;
   document.getElementById('emailModal').hidden = true;
   document.getElementById('viewModal').hidden = true;
 
-  // Check for saved API URL
-  try { apiUrl = localStorage.getItem(URL_KEY) || ''; } catch(e){}
+  // Check for saved API URL (hardcoded default if none saved)
+  const DEFAULT_API = 'https://script.google.com/macros/s/AKfycby9yCDPKObAo4DZGVUV4dETvSORwtb6R3D3c5yU1mxKw5XmzoFef6_toZitIXumN5GbSw/exec';
+  try { apiUrl = localStorage.getItem(URL_KEY) || DEFAULT_API; } catch(e){ apiUrl = DEFAULT_API; }
   if(!apiUrl){
     document.getElementById('setupBanner').classList.remove('hidden');
     setSyncStatus('red','Not connected — see setup above');
